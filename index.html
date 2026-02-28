@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A daily mobile-first game where you guess the Italian Brainrot character from progressive clues." />
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Brainrot Daily 🧠" />
+  <meta property="og:description" content="Guess the daily Italian Brainrot character from clues!" />
+  <meta property="og:type"        content="website" />
+
+  <title>Brainrot Daily 🧠</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Header ──────────────────────────────────────────────────── -->
+    <header>
+      <div class="header-left">
+        <h1>🧠 Brainrot Daily</h1>
+        <p class="subtitle">Guess the Italian Brainrot character!</p>
+      </div>
+      <div class="header-right">
+        <span class="streak">🔥 <span id="streak-count">0</span></span>
+        <button id="help-btn" class="icon-btn" aria-label="How to play">?</button>
+      </div>
+    </header>
+
+    <!-- ── Score bar ────────────────────────────────────────────────── -->
+    <div id="score-display" data-state="playing" role="status" aria-live="polite">
+      Up to 1,000 pts
+    </div>
+
+    <!-- ── Clue cards ───────────────────────────────────────────────── -->
+    <section id="clues-container" aria-label="Clues"></section>
+
+    <!-- ── Wrong guesses ────────────────────────────────────────────── -->
+    <section id="guesses-container" aria-label="Previous guesses"></section>
+
+    <!-- ── Guess input ──────────────────────────────────────────────── -->
+    <section id="input-section" aria-label="Make a guess">
+      <form id="guess-form" autocomplete="off">
+        <input
+          type="text"
+          id="guess-input"
+          list="character-list"
+          placeholder="Type the character name…"
+          autocorrect="off"
+          autocapitalize="words"
+          spellcheck="false"
+          aria-label="Character name guess"
+          required
+        />
+        <datalist id="character-list"></datalist>
+        <button type="submit" id="submit-btn">Guess</button>
+      </form>
+      <p class="guess-hint">Tip: suggestions appear as you type.</p>
+    </section>
+
+    <!-- ── Result overlay ───────────────────────────────────────────── -->
+    <div id="result-screen" role="dialog" aria-modal="true" aria-labelledby="result-title" hidden>
+      <div class="result-card">
+        <div id="result-emoji"  aria-hidden="true"></div>
+        <h2  id="result-title"></h2>
+        <p   id="result-name"   aria-label="Character name"></p>
+        <p   id="result-score"  aria-label="Score earned"></p>
+        <p   id="result-detail"></p>
+        <button id="share-btn">📋 Share Result</button>
+        <p id="next-timer"></p>
+      </div>
+    </div>
+
+    <!-- ── How to play modal ─────────────────────────────────────────── -->
+    <div id="how-to-play-modal" role="dialog" aria-modal="true" aria-labelledby="htp-title" hidden>
+      <div class="modal-card">
+        <h2 id="htp-title">How to Play</h2>
+        <ol>
+          <li>A new <strong>Italian Brainrot character</strong> is featured every day.</li>
+          <li>Read <strong>Clue 1</strong> and type your guess in the text box.</li>
+          <li>A <strong>correct guess</strong> earns you points — more points for fewer clues used.</li>
+          <li>A <strong>wrong guess</strong> reveals the next clue, but reduces the maximum points.</li>
+          <li>You have <strong>5 clues</strong> in total. If you haven't guessed by then, the answer is revealed.</li>
+          <li>Come back <strong>every day</strong> for a new character and keep your streak alive! 🔥</li>
+        </ol>
+        <button id="how-to-play-close" class="modal-close-btn">Let's play!</button>
+      </div>
+    </div>
+
+  </div><!-- #app -->
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
